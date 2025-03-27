@@ -188,9 +188,7 @@ options:
 
 A full command looks as follows, the script holds high level DEBUG information to dive a little deep on what erros are going on and where:
 ```
-python .\AzFuntionDeployment.py --project-name csharpfunctionapp  --function-name csharpfunctionapp --functioncode C:\RedTeam\AzureFunctionsRelaySetup\functionapp\MyApp.cs --resource-group DMCRedirectorGroup --location westus --functionapp csharpDMCApp --storage-account csharpdmcstorageacct --newprefix dmc --base-dir C:\RedTeam\AzureFunctionsRelaySetup\functionapp
-
-python .\AzFuntionDeployment.py --project-name csharpfunctionapp  --function-name csharpfunctionapp --functioncode C:\RedTeam\AzureFunctionsRelaySetup\functionapp\MyApp.cs --resource-group DMCRedirectorGroup --location westus --functionapp csharpDMCApp --storage-account csharpdmcstorageacct --newprefix dmc --base-dir C:\RedTeam\AzureFunctionsRelaySetup\functionapp
+python .\AzFunctionDeployment.py --project-name csharpfunctionapp  --function-name csharpfunctionapp --functioncode C:\RedTeam\AzureFunctionsRelaySetup\functionapp\MyApp.cs --resource-group DMCRedirectorGroup --location westus --functionapp csharpDMCApp --storage-account csharpdmcstorageacct --newprefix dmc --base-dir C:\RedTeam\AzureFunctionsRelaySetup\functionapp
 
                          _._
                           :.
