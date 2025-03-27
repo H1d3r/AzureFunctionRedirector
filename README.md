@@ -12,7 +12,7 @@ https://posts.redteamtacticsacademy.com/azure-app-services-the-redirect-rollerco
 
 I was trying to look at ways to use Azure for relaying our beacon traffic through it, work is based on the `A Thousand Sails, One Harbor` blog post by @NinjaParanoid but even though great it was fully demonstrated with the usage of Brute Ratel, the C2 offered by Dark Vortex. Now the challenge was building this manually so I relied on tools and source code edits to modify any necessary code before compiling and uploading to Azure.
 
-When looking at some of the older posts to try and replcaite these techniques using Cobalt Strike I encountered issues, some fucntions where build in Node JS, Python and C#, I took the latter since I am more comfortable with this and I already started following NinjaParanoid guide.
+When looking at some of the older posts to try and replcaite these techniques using Cobalt Strike I encountered issues, some functions where build in Node JS, Python and C#, I took the latter since I am more comfortable with this and I already started following NinjaParanoid guide.
 
 I found some great help when trying to replicate it on Cobalt Strike using the [FunctionalC2](https://web.archive.org/web/20241203083420/https://fortynorthsecurity.com/blog/azure-functions-functional-redirection/) blog. I noticed that in the Functions they need a prefix value in the URL so these were created:
 
@@ -32,7 +32,7 @@ POST URi:
 
 
 ## The C2 Profiles
-Now the Malleable profile was the tricky part, when you forward your traffic with Azure, azure does it's magic and scrambles the profile that it will be sent to Cobalt Strike with new data that Cobalt Strike doesn't udnerstand because some of the important one's are missing like the `BeaconID` which I found out the hard way:
+Now the Malleable profile was the tricky part, when you forward your traffic with Azure, now azure does it's magic and scrambles the profile that it will be sent to Cobalt Strike with new data that Cobalt Strike doesn't understand because some of the important one's are missing like the `BeaconID` which I found out the hard way, but Azure does not modify anything in the URL which we can place our ID with the `parameter` value in our GET request and in the headers, which we can use the `header` value in our post request in the `metadata` blocks on our profile:
 
 ![image](https://github.com/user-attachments/assets/93ff6d14-c7a3-49ac-8707-5249ed1b1071)
 
