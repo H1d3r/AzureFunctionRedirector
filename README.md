@@ -10,16 +10,16 @@ https://github.com/Flangvik/AzureC2Relay
 
 https://posts.redteamtacticsacademy.com/azure-app-services-the-redirect-rollercoaster-you-didnt-know-you-needed-fa66bfa12bf8
 
-I was trying to look at ways to use Azure for relaying our beacon traffic through it, work is based on the `A Thousand Sails, One Harbor` blog post by @NinjaParanoid but even though great it was fully demonstrated with the usage of Brute Ratel, the C2 offered by Dark Vortex. Now the challenge was building this manually so I relied on tools and source code edits to modify any necessary code before compiling and uploading to Azure.
+I was exploring ways to relay our beacon traffic through Azure, inspired by the 'A Thousand Sails, One Harbor' blog post by @NinjaParanoid. While the post is excellent, it primarily demonstrates the technique using Brute Ratel, the C2 provided by Dark Vortex. The real challenge was replicating this manually, so I relied on various tools and made source code modifications as needed before compiling and deploying to Azure.
 
-When looking at some of the older posts to try and replcaite these techniques using Cobalt Strike I encountered issues, some functions where build in Node JS, Python and C#, I took the latter since I am more comfortable with this and I already started following NinjaParanoid guide.
+When looking at some of the older posts I tried to replicate these techniques using Cobalt Strike but I encountered issues, some functions where build in Node JS, Python and C#, I took the latter since I am more comfortable with this language and I already started following the NinjaParanoid guide.
 
-I found some great help when trying to replicate it on Cobalt Strike using the [FunctionalC2](https://web.archive.org/web/20241203083420/https://fortynorthsecurity.com/blog/azure-functions-functional-redirection/) blog. I noticed that in the Functions they need a prefix value in the URL so these were created:
+I found some great help when trying to replicate it on Cobalt Strike using the [FunctionalC2](https://web.archive.org/web/20241203083420/https://fortynorthsecurity.com/blog/azure-functions-functional-redirection/) blog. I noticed that in the Functions needed a prefix value in the URL so these were created:
 
 <img width="610" alt="modifypath" src="https://github.com/user-attachments/assets/e1368df5-fd42-4185-a1cc-9ec498085e33" />
 
 
-Also after testing I had more look building 2 functions one that hanled GET requests and another POST requests with their respective URIs.
+After testing this I neede to build 2 functions each hanlding their respective URIs.
 
 GET Uri:
 
@@ -32,7 +32,7 @@ POST URi:
 
 
 ## The C2 Profiles
-Now the Malleable profile was the tricky part, when you forward your traffic with Azure, now azure does it's magic and scrambles the profile that it will be sent to Cobalt Strike with new data that Cobalt Strike doesn't understand because some of the important one's are missing like the `BeaconID` which I found out the hard way, but Azure does not modify anything in the URL which we can place our ID with the `parameter` value in our GET request and in the headers, which we can use the `header` value in our post request in the `metadata` blocks on our profile:
+The Malleable C2 profile was the tricky part. When forwarding traffic through Azure, Azure performs its own 'magic' and scrambles the profile data sent to Cobalt Strike—often stripping out critical elements like the `BeaconID`, which I learned the hard way. However, Azure doesn’t modify anything in the URL, which allows us to embed our ID using the `parameter` value in the GET request. We can also place it in the headers by using the `header` value in the POST request within the metadata blocks of our profile.
 
 ![image](https://github.com/user-attachments/assets/93ff6d14-c7a3-49ac-8707-5249ed1b1071)
 
