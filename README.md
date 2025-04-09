@@ -19,20 +19,20 @@ I found some great help when trying to replicate it on Cobalt Strike using the [
 <img width="610" alt="modifypath" src="https://github.com/user-attachments/assets/e1368df5-fd42-4185-a1cc-9ec498085e33" />
 
 
-After testing this I neede to build 2 functions each hanlding their respective URIs.
+After testing this I needed to build 2 functions each hanlding their respective URIs.
 
-GET Uri:
+GET URL:
 
 ![image](https://github.com/user-attachments/assets/8c90f72d-1e4d-43fe-bf52-920bcda25434)
 
 
-POST URi:
+POST URL:
 
 ![image](https://github.com/user-attachments/assets/51606325-aa50-4228-a047-35007eaf4836)
 
 
 ## The C2 Profiles
-The Malleable C2 profile was the tricky part. When forwarding traffic through Azure, Azure performs its own 'magic' and scrambles the profile data sent to Cobalt Strike—often stripping out critical elements like the `BeaconID`, which I learned the hard way. However, Azure doesn’t modify anything in the URL, which allows us to embed our ID using the `parameter` value in the GET request. We can also place it in the headers by using the `header` value in the POST request within the metadata blocks of our profile.
+The Malleable C2 profile was the tricky part. When forwarding traffic through Azure, Azure performs its own 'magic' and scrambles the profile data sent to Cobalt Strike often stripping out critical elements like the `BeaconID`, which I learned the hard way. However, Azure doesn’t modify anything in the URL, which allows us to embed our ID using the `parameter` value in the GET request. We can also place it in the headers by using the `header` value in the POST request within the metadata blocks of our profile.
 
 ![image](https://github.com/user-attachments/assets/93ff6d14-c7a3-49ac-8707-5249ed1b1071)
 
